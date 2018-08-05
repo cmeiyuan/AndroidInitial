@@ -1,1 +1,12 @@
-include ':app'
+include ':app', ':common'
+
+def modules =
+        [
+                'module/common'
+        ]
+
+modules.forEach { path ->
+    String name = path.substring(path.lastIndexOf("/") + 1)
+    include name
+    project(":${name}").projectDir = new File(rootProject.getProjectDir(), path)
+}
