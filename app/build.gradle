@@ -13,7 +13,7 @@ android {
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         proguardFiles fileTree('proguard/').asList() as String[]
         ndk {
-            abiFilters 'armeabi'
+            abiFilters 'armeabi', 'x86'
         }
         resConfigs "zh"
     }
@@ -60,9 +60,9 @@ android {
     buildTypes {
         debug {
             debuggable true
-            minifyEnabled true
+            minifyEnabled false
             zipAlignEnabled true
-            shrinkResources true
+            shrinkResources false
             signingConfig signingConfigs.releaseConfig
         }
         release {
@@ -83,6 +83,11 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation "com.jakewharton:butterknife:$rootProject.ext.butterknifeVerson"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVerson"
+    implementation "org.greenrobot:eventbus:$rootProject.ext.eventbusVersion"
+    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
 
     implementation project(":common")
 }
