@@ -45,6 +45,12 @@ public class TitleBarActivity extends BaseActivity {
         super.setContentView(R.layout.acitity_titlebar);
         titleBar = findViewById(R.id.titleBar);
         titleBar.init(getTitleBarLayoutId());
+        titleBar.setLeftImageClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         contentView = findViewById(R.id.contentView);
     }
 

@@ -3,6 +3,7 @@ package androidinitial.cmeiyuan.com.androidinitial.dataobject;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidinitial.cmeiyuan.com.androidinitial.R;
 import androidinitial.cmeiyuan.com.androidinitial.fragment.HomeFragment;
 import androidinitial.cmeiyuan.com.androidinitial.fragment.MineFragment;
 import androidinitial.cmeiyuan.com.androidinitial.fragment.OrderFragment;
@@ -15,9 +16,9 @@ public class Module {
     private static List<Module> modules = new ArrayList<>();
 
     static {
-        modules.add(new Module("首页", 0, "home", HomeFragment.class));
-        modules.add(new Module("订单", 0, "order", OrderFragment.class));
-        modules.add(new Module("首页", 0, "mine", MineFragment.class));
+        modules.add(new Module("首页", R.drawable.tabwidget_icon_home, "home", HomeFragment.class));
+        modules.add(new Module("订单", R.drawable.tabwidget_icon_order, "order", OrderFragment.class));
+        modules.add(new Module("我的", R.drawable.tabwidget_icon_mine, "mine", MineFragment.class));
     }
 
     public static List<Module> get() {

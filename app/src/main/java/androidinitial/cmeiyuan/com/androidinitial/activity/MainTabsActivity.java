@@ -3,9 +3,12 @@ package androidinitial.cmeiyuan.com.androidinitial.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import com.meiyuan.module.common.ui.TitleBarActivity;
 
@@ -21,9 +24,9 @@ import butterknife.ButterKnife;
  */
 public class MainTabsActivity extends TitleBarActivity implements TabHost.OnTabChangeListener {
 
-    @BindView(R.id.fragmentTabHost)
-    FragmentTabHost fragmentTabHost;
 
+    @BindView(android.R.id.tabhost)
+    FragmentTabHost tabHost;
     private Fragment currentFragment;
 
     @Override
@@ -35,25 +38,30 @@ public class MainTabsActivity extends TitleBarActivity implements TabHost.OnTabC
     }
 
     private void initTabs() {
-        fragmentTabHost.setup(this, getSupportFragmentManager());
+        tabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
         List<Module> modules = Module.get();
         for (Module module : modules) {
-            TabHost.TabSpec tabSpec = fragmentTabHost.newTabSpec(module.getTag());
-            tabSpec.setIndicator(module.getName(), getResources().getDrawable(module.getIcon()));
-            fragmentTabHost.addTab(tabSpec, module.getCls(), null);
+            TabHost.TabSpec tabSpec = tabHost.newTabSpec(module.getTag());
+            View view = LayoutInflater.from(this).inflate(R.layout.tabwidget_item, null);
+            ImageView tabWidgetIcon = view.findViewById(R.id.tab_widget_icon);
+            TextView tabWidgetText = view.findViewById(R.id.tab_widget_text);
+            tabWidgetIcon.setBackgroundResource(module.getIcon());
+            tabWidgetText.setText(module.getName());
+            tabSpec.setIndicator(view);
+            tabHost.addTab(tabSpec, module.getCls(), null);
         }
-        fragmentTabHost.getTabWidget().setDividerDrawable(null);
-        fragmentTabHost.setOnTabChangedListener(this);
+        tabHost.getTabWidget().setDividerDrawable(null);
+        tabHost.setOnTabChangedListener(this);
     }
 
     @Override
     public void onTabChanged(String tabId) {
-        if (currentFragment != null) {
-            currentFragment.setUserVisibleHint(false);
-        }
-        String tag = fragmentTabHost.getCurrentTabTag();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        currentFragment = fragmentManager.findFragmentByTag(tag);
-        currentFragment.setUserVisibleHint(true);
+//        if (currentFragment != null) {
+//            currentFragment.setUserVisibleHint(false);
+//        }
+//        String tag = tabHost.getCurrentTabTag();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        currentFragment = fragmentManager.findFragmentByTag(tag);
+//        currentFragment.setUserVisibleHint(true);
     }
 }

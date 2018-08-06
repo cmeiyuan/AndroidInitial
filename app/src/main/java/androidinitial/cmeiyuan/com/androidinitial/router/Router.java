@@ -4,12 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 
 import androidinitial.cmeiyuan.com.androidinitial.activity.LoginActivity;
+import androidinitial.cmeiyuan.com.androidinitial.activity.MainTabsActivity;
 import androidinitial.cmeiyuan.com.androidinitial.activity.RegisterActivity;
 
 /**
  * Created by cmeiyuan on 2018/8/5
  */
 public class Router {
+
+    public static Intent index(Activity activity) {
+        return new Intent(activity, MainTabsActivity.class);
+    }
 
     public static Intent login(Activity activity) {
         return new Intent(activity, LoginActivity.class);

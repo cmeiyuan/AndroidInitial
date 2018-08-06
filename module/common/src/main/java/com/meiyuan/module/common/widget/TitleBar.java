@@ -59,27 +59,46 @@ public class TitleBar extends FrameLayout {
     }
 
     public void setTitle(int textId) {
-        title.setText(textId);
+        if (title != null) {
+            title.setText(textId);
+        }
     }
 
     public void setTitle(CharSequence text) {
-        title.setText(text);
+        if (title != null) {
+            title.setText(text);
+        }
     }
 
     public void setLeftImage(int resId) {
+        leftImage.setVisibility(View.VISIBLE);
         leftImage.setImageResource(resId);
     }
 
     public void setRightImage(int resId) {
+        rightImage.setVisibility(View.VISIBLE);
         rightImage.setImageResource(resId);
     }
 
     public void setLeftImageClickListener(View.OnClickListener listener) {
+        leftImage.setVisibility(View.VISIBLE);
         leftImage.setOnClickListener(listener);
     }
 
     public void setRightImageClickListener(View.OnClickListener listener) {
+        rightImage.setVisibility(View.VISIBLE);
         rightImage.setOnClickListener(listener);
     }
 
+    public TextView getTitle() {
+        return title;
+    }
+
+    public ImageView getLeftImage() {
+        return leftImage;
+    }
+
+    public ImageView getRightImage() {
+        return rightImage;
+    }
 }
